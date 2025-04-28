@@ -4,6 +4,8 @@
  */
 package summerprojects.TextAdventureProject;
 
+import java.util.Scanner;
+
 /**
  *
  * @author kodenstark
@@ -14,15 +16,32 @@ public class Player {
     private int health;
     private int baseAtk;
     
-    public Player(String name){
+    Scanner scan = new Scanner(System.in);
     
-        this.name = name;
+    public Player(){
+    
+        name = name;
         health = 80;
         baseAtk = 5;
     }
     
-    public static void main(String[] args) {
-        System.out.println("Hello World");
+    //Access Modifiers
+    
+    public String getName(){
+    
+        return name;
     }
+    
+    public int getHealth(){
+    
+        return health;
+    }
+    
+    public int getBaseAtk(){
+    
+        return baseAtk;
+    }
+    
+    
     
 }
