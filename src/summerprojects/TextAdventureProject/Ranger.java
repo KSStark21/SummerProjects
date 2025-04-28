@@ -10,8 +10,13 @@ package summerprojects.TextAdventureProject;
  */
 public class Ranger extends Player {
     
+    private int level;
+    private int exp;
+    
+    
     public Ranger(String name) {
-        super();
+        super(name);
+        
     }
     
     

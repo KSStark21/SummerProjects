@@ -18,9 +18,9 @@ public class Player {
     
     Scanner scan = new Scanner(System.in);
     
-    public Player(){
+    public Player(String name){
     
-        name = name;
+        this.name = name;
         health = 80;
         baseAtk = 5;
     }
