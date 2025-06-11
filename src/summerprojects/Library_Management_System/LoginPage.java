@@ -4,6 +4,7 @@
  */
 package summerprojects.Library_Management_System;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,8 +17,11 @@ public class LoginPage extends javax.swing.JFrame {
      * Creates new form LoginPage
      */
     public LoginPage() {
+        
+        super("Library Management System");
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,16 +94,26 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+       
         
-        if(jTextField1.getText().toLowerCase().equals("admin") && jPasswordField1.getText().toLowerCase().equals("admin")){
         
-            setVisible(false);
-            new HomePage().setVisible(true);
+        String enteredUsername = jTextField1.getText();
+        
+        for(String validUsername : ){
+        
+            if(enteredUsername.equalsIgnoreCase(validUsername)){
+            
+                setVisible(false);
+                new HomePage().setVisible(true);
+                break;
+            }
+            else{
+            
+                    JOptionPane.showMessageDialog(null, "Incorrect Username or Password.");
+            }
         }
-        else{
         
-            JOptionPane.showMessageDialog(null, "Incorrect Username or Password. Please Try Again.");
-        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
