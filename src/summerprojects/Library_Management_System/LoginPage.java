@@ -4,8 +4,11 @@
  */
 package summerprojects.Library_Management_System;
 
-import java.util.ArrayList;
+
+
 import javax.swing.JOptionPane;
+import LMS_Classes.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -94,14 +97,18 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       
         
+        ArrayList <Admin> adminList = new ArrayList<>();
+        adminList.add(new Admin("admin", "admin"));
         
-        String enteredUsername = jTextField1.getText();
+        String username = jTextField1.getText();
+        String password = jPasswordField1.getText();
         
-        for(String validUsername : ){
+        Admin admin = new Admin(username, password);
         
-            if(enteredUsername.equalsIgnoreCase(validUsername)){
+        for(Admin a : adminList){
+        
+            if(a.equals(admin)){
             
                 setVisible(false);
                 new HomePage().setVisible(true);
@@ -109,11 +116,9 @@ public class LoginPage extends javax.swing.JFrame {
             }
             else{
             
-                    JOptionPane.showMessageDialog(null, "Incorrect Username or Password.");
-            }
+                JOptionPane.showMessageDialog(null, "Incorrect Username or Password!");
+            } 
         }
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
