@@ -24,6 +24,10 @@ public class LoginPage extends javax.swing.JFrame {
         super("Library Management System");
         initComponents();
     }
+    
+     public ArrayList <Admin> admins = new ArrayList<>();
+     public ArrayList <User> users = new ArrayList<>();
+     
 
 
     /**
@@ -98,27 +102,38 @@ public class LoginPage extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        ArrayList <Admin> adminList = new ArrayList<>();
-        adminList.add(new Admin("admin", "admin"));
+        admins.add(new Admin("admin", "admin"));
+        users.add(new User("user", "user"));
         
-        String username = jTextField1.getText();
-        String password = jPasswordField1.getText();
+        Admin ad1 = new Admin(jTextField1.getText(), jPasswordField1.getText());
+        User ur1 = new User(jTextField1.getText(), jPasswordField1.getText());
+        boolean verifiable = false;
         
-        Admin admin = new Admin(username, password);
+        for(Admin a : admins){
         
-        for(Admin a : adminList){
-        
-            if(a.equals(admin)){
+            if(a.equals(ad1)){
             
+                verifiable = true;
                 setVisible(false);
                 new HomePage().setVisible(true);
                 break;
             }
             else{
             
-                JOptionPane.showMessageDialog(null, "Incorrect Username or Password!");
-            } 
+                JOptionPane.showMessageDialog(null, "Incorrect Username or Password.");
+            }
+           
         }
+        
+        for(User u : users){
+        
+            if(u.equals(ur1)){
+            
+                verifiable = true;
+            }
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

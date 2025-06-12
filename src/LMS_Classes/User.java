@@ -4,33 +4,28 @@
  */
 package LMS_Classes;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
-
 /**
  *
  * @author kodenstark
  */
-public class Admin {
+public class User {
+    
     private String username;
     private String password;
     
-    public Admin(String username, String password){
+    public User(String username, String password){
     
-         this.username = username;
-         this.password = password;
+        this.username = username;
+        this.password = password;
     }
-    
-    
     
     @Override
     public boolean equals(Object other){
     
         if(other == null) return false;
-        if(!(other instanceof Admin)) return false;
-        Admin ad2 = (Admin)other;
-        if(ad2.username.equals(this.username) && ad2.password.equals(this.password)){
+        if(!(other instanceof User)) return false;
+        User ur1 = (User)other;
+        if(ur1.username.equals(this.username) && ur1.password.equals(this.password)){
         
             return true;
         }
@@ -38,5 +33,6 @@ public class Admin {
         
             return false;
         }
-    } 
+    }
+    
 }
