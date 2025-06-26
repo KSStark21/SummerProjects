@@ -61,7 +61,7 @@ public class AdminDatabase {
         
         AdminDatabase ad = (AdminDatabase) o;
         
-        if((ad.adminID == this.adminID) && (ad.username.equals(this.username)) && 
+        if(ad.adminID.equals(this.adminID) && ad.username.equals(this.username) && 
                 ad.password.equals(this.password)) {
             
             return true;

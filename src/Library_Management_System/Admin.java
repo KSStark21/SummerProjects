@@ -116,7 +116,7 @@ public class Admin extends javax.swing.JFrame {
         }
         else {
             
-            JOptionPane.showMessageDialog(null, "Username, Password, or Id is incorrect. Please try again.");
+            JOptionPane.showMessageDialog(this, "Username, Password, or Id is incorrect. Please try again.");
         }
        
          

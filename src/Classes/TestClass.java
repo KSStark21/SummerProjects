@@ -4,23 +4,19 @@
  */
 package Classes;
 
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author legac
  */
-public class Admin {
+public class TestClass {
     
-    protected String adminID;
-    
-    public Admin(String adminID) {
+    public static void main(String[] args) {
+          
         
-        this.adminID = adminID;
+        
     }
-    
-    //Accessor Method(s)
-    
-    public String getAdminID(){
-    
-        return adminID;
-    }
+        
 }
