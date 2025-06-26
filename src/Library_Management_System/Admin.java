@@ -4,7 +4,7 @@
  */
 package Library_Management_System;
 
-import Classes.*;
+import java.sql.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
  * @author legac
  */
 public class Admin extends javax.swing.JFrame {
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Admin.class.getName());
 
@@ -96,31 +99,31 @@ public class Admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-       
-           
-        AdminDatabase ad = new AdminDatabase("123456", "admin", "admin1");
-        
-        String u = username.getText();
-        String p = password.getText();
-        String i = adminID.getText();
-                  
-        
-        AdminDatabase a1 = new AdminDatabase(i, u, p);
-        
-        if(ad.equals(a1)){
-        
-            setVisible(false);
-            new Library_Manager().setVisible(true);
-        }
-        else {
+        // TODO add your handling code here
+        try{
+                
+            String query = "Select * From adminlogin Where ID=? and username=? and password=?";
             
-            JOptionPane.showMessageDialog(this, "Username, Password, or Id is incorrect. Please try again.");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/admincredentials", "root", "IC0I&o#twr@mysql");
+            pst = con.prepareStatement(query);
+            pst.setString(1, adminID.getText());
+            pst.setString(2, username.getText());
+            pst.setString(3, password.getText());
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+            
+                setVisible(false);
+                new Library_Manager().setVisible(true);
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Incorrect username, password, or ID. Please try again.");
+            }
         }
-       
-         
-        
+        catch(Exception e){
+            
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
