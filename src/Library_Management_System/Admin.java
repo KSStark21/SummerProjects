@@ -4,6 +4,9 @@
  */
 package Library_Management_System;
 
+import Classes.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author legac
@@ -31,10 +34,12 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        username = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        password = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        adminID = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,10 +55,10 @@ public class Admin extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 120, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 120, 30));
 
-        jTextField1.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 200, 30));
+        username.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 200, 30));
 
         jButton1.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jButton1.setText("Login");
@@ -62,7 +67,7 @@ public class Admin extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, -1));
 
         jButton2.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
         jButton2.setText("Close");
@@ -71,10 +76,16 @@ public class Admin extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, -1, -1));
 
-        jPasswordField1.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 200, 30));
+        password.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 190, 200, 30));
+
+        jLabel4.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("ID:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 30, 30));
+        getContentPane().add(adminID, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 200, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Icon_Images/desktop-abstract-2020-4k-mm.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
@@ -86,6 +97,30 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+       
+           
+        AdminDatabase ad = new AdminDatabase("123456", "admin", "admin1");
+        
+        String u = username.getText();
+        String p = password.getText();
+        String i = adminID.getText();
+                  
+        
+        AdminDatabase a1 = new AdminDatabase(i, u, p);
+        
+        if(ad.equals(a1)){
+        
+            setVisible(false);
+            new Library_Manager().setVisible(true);
+        }
+        else {
+            
+            JOptionPane.showMessageDialog(null, "Username, Password, or Id is incorrect. Please try again.");
+        }
+       
+         
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -121,12 +156,14 @@ public class Admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField adminID;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
