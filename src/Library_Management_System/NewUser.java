@@ -3,23 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Library_Management_System;
-import java.sql.*;
+
 import Library_Management_System.Project.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author legac
  */
-public class NewAdmin extends javax.swing.JFrame {
+public class NewUser extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NewAdmin.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(NewUser.class.getName());
 
     /**
-     * Creates new form NewAdmin
+     * Creates new form NewUser
      */
-    public NewAdmin() {
-        super("New Admin Page");
+    public NewUser() {
+        super("New User Page");
         initComponents();
         
     }
@@ -37,38 +40,34 @@ public class NewAdmin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        adminID = new javax.swing.JTextField();
+        firstName = new javax.swing.JTextField();
+        lastName = new javax.swing.JTextField();
         username = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
-        firstname = new javax.swing.JTextField();
-        lastname = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        userID = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Admin ID:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 93, -1, -1));
+        jLabel1.setText("First Name:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
 
-        jLabel2.setText("Username:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 148, -1, -1));
+        jLabel2.setText("Last Name:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, -1, 20));
 
-        jLabel3.setText("Password:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 206, -1, -1));
+        jLabel3.setText("Username:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, 20));
 
-        jLabel4.setText("First Name:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 262, -1, -1));
-
-        jLabel5.setText("Last Name:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 312, -1, -1));
-        getContentPane().add(adminID, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 172, -1));
-        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 172, -1));
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 172, -1));
-        getContentPane().add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 172, -1));
-        getContentPane().add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 172, -1));
+        jLabel4.setText("Password:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, -1, -1));
+        getContentPane().add(firstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 172, -1));
+        getContentPane().add(lastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 172, -1));
+        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 172, -1));
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 172, -1));
 
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +75,7 @@ public class NewAdmin extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, -1, -1));
 
         jButton2.setText("Close");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -84,10 +83,14 @@ public class NewAdmin extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, -1, -1));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Icon_Images/notebook-581128_640.jpg"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 420));
+        jLabel6.setText("User ID:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
+        getContentPane().add(userID, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 170, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Icon_Images/notebook-581128_640.jpg"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -95,29 +98,26 @@ public class NewAdmin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        String adminID = this.adminID.getText();
+        String fullName = firstName.getText() + " " + lastName.getText();
+        int userID = Integer.parseInt(this.userID.getText());
         String username = this.username.getText();
         String password = this.password.getText();
-        String firstName = firstname.getText();
-        String lastName = lastname.getText();
-                        
-         
+        
         try{
         
-            Connection con = ConnectionProvider.getAdminCon();
+            Connection con = ConnectionProvider.getUserCon();
             Statement st = con.createStatement();
-            st.executeUpdate("insert into adminlogin values('"+adminID+"', '"+username+"', '"+password+"', '"+firstName+"', '"+lastName+"')");
+            st.executeUpdate("insert into userlogin values('"+fullName+"', '"+userID+"', '"+username+"', '"+password+"')");
              
-            JOptionPane.showMessageDialog(this, "Successfully Created. Welcome To The Team " + firstName + " " + lastName + ".");
+            JOptionPane.showMessageDialog(this, "Successfully Created. Welcome To Our Library " + fullName + ".");
             setVisible(false);
-            new NewAdmin().setVisible(true);            
+            new NewUser().setVisible(true);            
             
         }
         catch(Exception e){
         
-            JOptionPane.showMessageDialog(this, "Admin already exists or not all of the information has been filled out.");           
+            JOptionPane.showMessageDialog(this, "User already exists or not all of the information has been filled out.");           
         }
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -148,12 +148,11 @@ public class NewAdmin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new NewAdmin().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new NewUser().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField adminID;
-    private javax.swing.JTextField firstname;
+    private javax.swing.JTextField firstName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -162,8 +161,9 @@ public class NewAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField lastname;
+    private javax.swing.JTextField lastName;
     private javax.swing.JPasswordField password;
+    private javax.swing.JTextField userID;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

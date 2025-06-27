@@ -1,5 +1,7 @@
 package Library_Management_System;
 
+import javax.swing.JFrame;
+
 
 
 /*
@@ -21,6 +23,7 @@ public class AdminOrUserPage extends javax.swing.JFrame {
     public AdminOrUserPage() {
         super("Select A Form Of Login");
         initComponents();
+        
     }
 
     /**
