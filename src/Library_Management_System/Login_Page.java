@@ -17,6 +17,7 @@ public class Login_Page extends javax.swing.JFrame {
      * Creates new form Login_Page
      */
     public Login_Page() {
+        super("Login Page ");
         initComponents();
     }
     Connection con = null;

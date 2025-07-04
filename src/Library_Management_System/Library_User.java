@@ -16,6 +16,7 @@ public class Library_User extends javax.swing.JFrame {
      * Creates new form Library_User
      */
     public Library_User() {
+        super("Login User");
         initComponents();
     }
 
