@@ -2,20 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Library_Management_System;
+package Library_Management_System.TestGUI;
+
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author legac
  */
-public class Library_User extends javax.swing.JFrame {
+public class TestGUI extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Library_User.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TestGUI.class.getName());
 
     /**
-     * Creates new form Library_User
+     * Creates new form TestGUI
      */
-    public Library_User() {
+    public TestGUI() {
         initComponents();
     }
 
@@ -32,7 +34,7 @@ public class Library_User extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Close");
+        jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -44,16 +46,16 @@ public class Library_User extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
+                .addGap(87, 87, 87)
                 .addComponent(jButton1)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(63, 63, 63)
                 .addComponent(jButton1)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
 
         pack();
@@ -61,8 +63,8 @@ public class Library_User extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         setVisible(false);
-        new Login_Page().setVisible(true);
+        
+        JOptionPane.showMessageDialog(this, "Hi.");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -87,7 +89,7 @@ public class Library_User extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Library_User().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TestGUI().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

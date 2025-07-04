@@ -134,19 +134,24 @@ public class Login_Page extends javax.swing.JFrame {
         rs = pst.executeQuery();
         if(rs.next()){
         
-            if(usertype.getSelectedIndex()==0 || usertype.getSelectedIndex() == 1){
+            if(usertype.getSelectedIndex() == 0){
             
                 setVisible(false);
                 new Library_Manager().setVisible(true);
             }
-            else if (usertype.getSelectedIndex() == 2) {
+            else if (usertype.getSelectedIndex() == 1) {
                 
+                setVisible(false);
+                new Library_Manager().setVisible(true);
+            }
+            else{
+            
                 setVisible(false);
                 new Library_User().setVisible(true);
             }
-            else {
-                JOptionPane.showMessageDialog(this, "Incorrect inputted information. Please try again.");
-            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Incorrect Information. Please try again.");
         }
         }
         catch(Exception e){
