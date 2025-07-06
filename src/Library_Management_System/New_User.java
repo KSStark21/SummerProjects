@@ -137,6 +137,7 @@ public class New_User extends javax.swing.JFrame {
              Statement st = con.createStatement();
              st.executeUpdate("insert into LoginInformation values('"+First+"', '"+Last+"', '"+User+"', '"+Pass+"', '"+Type+"', '"+ID+"')");
              
+             
              JOptionPane.showMessageDialog(this, "Information has been successfully added. Welcome to our Library " + First + ".");
              setVisible(false);
              new Library_Manager().setVisible(true);
