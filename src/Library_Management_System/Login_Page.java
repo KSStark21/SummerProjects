@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Library_Management_System;
+import Connection_Package.ConnectionProvider;
 import java.sql.*;
 import javax.swing.JOptionPane;
 /**
@@ -124,7 +125,7 @@ public class Login_Page extends javax.swing.JFrame {
         try{
         String query = "select * from LoginInformation Where FirstName =? and LastName =? and Username =? and Password =? and Usertype=? and LibraryID=?";
         
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms", "root", "IC0I&o#twr@mysql");
+        con = ConnectionProvider.getCon();
         pst = con.prepareStatement(query);
         pst.setString(1, firstname.getText());
         pst.setString(2, lastname.getText());
