@@ -44,6 +44,8 @@ public class New_User extends javax.swing.JFrame {
         libraryID = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,19 +61,19 @@ public class New_User extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel3.setText("New Username:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 330, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel4.setText("New Password:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel5.setText("New Usertype:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, 110, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 480, 110, -1));
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel6.setText("New LibraryID:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 490, 120, 20));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 560, 120, 20));
 
         firstname.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         firstname.addActionListener(new java.awt.event.ActionListener() {
@@ -85,16 +87,16 @@ public class New_User extends javax.swing.JFrame {
         getContentPane().add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 180, 170, -1));
 
         username.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 260, 170, -1));
+        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 330, 170, -1));
 
         password.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 340, 170, -1));
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, 170, -1));
 
-        usertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Librarian", "User" }));
-        getContentPane().add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 420, 170, -1));
+        usertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Select a Role*", "Admin", "Librarian", "Member" }));
+        getContentPane().add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 480, 170, -1));
 
         libraryID.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        getContentPane().add(libraryID, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 170, -1));
+        getContentPane().add(libraryID, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 560, 170, -1));
 
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +104,7 @@ public class New_User extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 560, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 620, -1, -1));
 
         jButton2.setText("Close");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +112,12 @@ public class New_User extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 560, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 620, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        jLabel8.setText("Email:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, 120, 20));
+        getContentPane().add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, 170, -1));
 
         jLabel7.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/notebook-581128_1280.jpg"))); // NOI18N
@@ -127,15 +134,17 @@ public class New_User extends javax.swing.JFrame {
         // TODO add your handling code here:
         String First = firstname.getText();
         String Last = lastname.getText();
+        String Email = email.getText();
         String User = username.getText();
         String Pass = password.getText();
-        String Type = String.valueOf(usertype.getSelectedItem());
+        String Type = String.valueOf(usertype.getSelectedIndex());
         int ID = Integer.parseInt(libraryID.getText());
         
         try {
              Connection con = ConnectionProvider.getCon();
              Statement st = con.createStatement();
-             st.executeUpdate("insert into LoginInformation values('"+First+"', '"+Last+"', '"+User+"', '"+Pass+"', '"+Type+"', '"+ID+"')");
+             st.executeUpdate("insert into user values('"+ID+"','"+First+"', '"+Last+"', '"+Email+"', '"+User+"', '"+Pass+"')");
+             st.executeUpdate("insert into user_role values('"+ID+"', '"+Type+"')");
              
              
              JOptionPane.showMessageDialog(this, "Information has been successfully added. Welcome to our Library " + First + ".");
@@ -182,6 +191,7 @@ public class New_User extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField email;
     private javax.swing.JTextField firstname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -192,6 +202,7 @@ public class New_User extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField lastname;
     private javax.swing.JTextField libraryID;
     private javax.swing.JPasswordField password;

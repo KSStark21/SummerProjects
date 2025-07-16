@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Library_Management_System;
-import Connection_Package.ConnectionProvider;
+import Permissions_Roles_Package.User;
+import Permissions_Roles_Package.UserDAO;
 import java.sql.*;
 import javax.swing.JOptionPane;
 /**
@@ -34,17 +35,11 @@ public class Login_Page extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        firstname = new javax.swing.JTextField();
-        lastname = new javax.swing.JTextField();
         username = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
-        usertype = new javax.swing.JComboBox<>();
         libraryid = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -53,49 +48,32 @@ public class Login_Page extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jLabel1.setText("First Name:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 90, -1));
-
-        jLabel2.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jLabel2.setText("Last Name:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 90, -1));
-
         jLabel3.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel3.setText("Username:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 90, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel4.setText("Password:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 80, -1));
-
-        jLabel5.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        jLabel5.setText("Usertype:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 90, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 80, -1));
 
         jLabel6.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         jLabel6.setText("Library ID:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 510, 150, 20));
-        getContentPane().add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, 380, -1));
-
-        lastname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastnameActionPerformed(evt);
-            }
-        });
-        getContentPane().add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 230, 380, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 150, 20));
 
         username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameActionPerformed(evt);
             }
         });
-        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 300, 380, -1));
-        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 370, 380, -1));
+        getContentPane().add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 230, 380, -1));
 
-        usertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Librarian", "User" }));
-        getContentPane().add(usertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 440, 380, -1));
-        getContentPane().add(libraryid, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 510, 380, -1));
+        password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordActionPerformed(evt);
+            }
+        });
+        getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 350, 380, -1));
+        getContentPane().add(libraryid, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, 380, -1));
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -127,43 +105,42 @@ public class Login_Page extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        try{
-        String query = "select * from LoginInformation Where FirstName =? and LastName =? and Username =? and Password =? and Usertype=? and LibraryID=?";
+        try {
+        String usernam = username.getText();
+        char[] passwordChars = password.getPassword();
+        String enteredPassword = new String(passwordChars);
+        int userId = Integer.parseInt(libraryid.getText());
         
-        con = ConnectionProvider.getCon();
+        String query = "Select User_Id from users where User_Id = ?";
+        
+        UserDAO userDAO = new UserDAO();
+        User authenticatedUser = userDAO.authenticateAndGetUser(usernam, enteredPassword);
+        
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/lms", "root", "IC0I&o#twr@mysql");
         pst = con.prepareStatement(query);
-        pst.setString(1, firstname.getText());
-        pst.setString(2, lastname.getText());
-        pst.setString(3, username.getText());
-        pst.setString(4, password.getText());
-        pst.setString(5, String.valueOf(usertype.getSelectedItem()));
-        pst.setString(6, libraryid.getText());
+        pst.setString(1, libraryid.getText());
         rs = pst.executeQuery();
-        if(rs.next()){
         
-            if(usertype.getSelectedIndex() == 0){
+        if(authenticatedUser != null && rs.next()) {           
             
-                setVisible(false);
-                new Library_Manager().setVisible(true);
-            }
-            else if (usertype.getSelectedIndex() == 1) {
-                
-                setVisible(false);
-                new Library_Manager().setVisible(true);
-            }
-            else{
+            Library_Manager manager = new Library_Manager(authenticatedUser);
             
-                setVisible(false);
+             if(authenticatedUser.hasRole("MEMBER")) {
+                setVisible(false);                
                 new Library_User().setVisible(true);
             }
+             else {
+            manager.setVisible(true);
+            dispose();
+             }
         }
-        else {
-            JOptionPane.showMessageDialog(this, "Incorrect Information. Please try again.");
-        }
-        }
-        catch(Exception e){
         
-            JOptionPane.showMessageDialog(this, e.getMessage());
+        else {
+            JOptionPane.showMessageDialog(this, "Invalid Username, Password, or Id.", "Login Failed.", JOptionPane.ERROR_MESSAGE);
+        }
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(this, e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -173,10 +150,6 @@ public class Login_Page extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void lastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lastnameActionPerformed
-
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameActionPerformed
@@ -184,6 +157,10 @@ public class Login_Page extends javax.swing.JFrame {
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1KeyPressed
+
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,20 +188,14 @@ public class Login_Page extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField firstname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField lastname;
     private javax.swing.JTextField libraryid;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
-    private javax.swing.JComboBox<String> usertype;
     // End of variables declaration//GEN-END:variables
 }

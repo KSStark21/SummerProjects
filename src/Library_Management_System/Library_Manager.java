@@ -10,18 +10,30 @@
  */
 package Library_Management_System;
 
+import Permissions_Roles_Package.PermissionsManager;
+import Permissions_Roles_Package.User;
+
 /**
  *
  * @author legac
  */
 public class Library_Manager extends javax.swing.JFrame {
     
+    private User currentUser;
+    private PermissionsManager pm;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Library_Manager.class.getName());
 
     /**
      * Creates new form Library_Manager
      */
     public Library_Manager() {
+        super("Library Manager");
+        initComponents();
+    }
+    
+    public Library_Manager(User authenticatedUser) {
+        this.currentUser = authenticatedUser;
+        pm = new PermissionsManager();
         super("Library Manager");
         initComponents();
     }
@@ -36,18 +48,19 @@ public class Library_Manager extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        NEW_USER = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        New_User = new javax.swing.JButton();
+        Lend_Items = new javax.swing.JButton();
+        Inventory = new javax.swing.JButton();
+        Collections = new javax.swing.JButton();
+        Library_Reports = new javax.swing.JButton();
+        Catalog = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Library Manager");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
         jButton1.setText("Close");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -55,87 +68,71 @@ public class Library_Manager extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1044, 592, 110, -1));
 
-        NEW_USER.setBackground(new java.awt.Color(204, 204, 204));
-        NEW_USER.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-add-user-100.png"))); // NOI18N
-        NEW_USER.setAlignmentX(0.5F);
-        NEW_USER.setAlignmentY(0.0F);
-        NEW_USER.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Manager", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 12))); // NOI18N
-        NEW_USER.addActionListener(new java.awt.event.ActionListener() {
+        New_User.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-add-user-100.png"))); // NOI18N
+        New_User.setAlignmentX(0.5F);
+        New_User.setAlignmentY(0.0F);
+        New_User.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User Manager", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 12))); // NOI18N
+        New_User.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NEW_USERActionPerformed(evt);
+                New_UserActionPerformed(evt);
             }
         });
+        getContentPane().add(New_User, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 122, -1, 124));
 
-        jButton3.setBackground(new java.awt.Color(204, 204, 204));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-borrow-book-100.png"))); // NOI18N
-        jButton3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lend Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 12))); // NOI18N
+        Lend_Items.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-borrow-book-100.png"))); // NOI18N
+        Lend_Items.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lend Items", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 12))); // NOI18N
+        Lend_Items.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Lend_ItemsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Lend_Items, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 122, -1, 124));
 
-        jButton4.setBackground(new java.awt.Color(204, 204, 204));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-book-shelf-100.png"))); // NOI18N
-        jButton4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Inventory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 12))); // NOI18N
+        Inventory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-book-shelf-100.png"))); // NOI18N
+        Inventory.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Inventory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 12))); // NOI18N
+        Inventory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InventoryActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Inventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 122, -1, 124));
 
-        jButton2.setBackground(new java.awt.Color(204, 204, 204));
-        jButton2.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-database-100.png"))); // NOI18N
-        jButton2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Collections", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 12))); // NOI18N
+        Collections.setFont(new java.awt.Font("Georgia", 1, 12)); // NOI18N
+        Collections.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-database-100.png"))); // NOI18N
+        Collections.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Collections", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 12))); // NOI18N
+        Collections.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CollectionsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Collections, new org.netbeans.lib.awtextra.AbsoluteConstraints(664, 122, -1, 124));
 
-        jButton5.setBackground(new java.awt.Color(204, 204, 204));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-graph-report-100.png"))); // NOI18N
-        jButton5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Library Reports", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 12))); // NOI18N
+        Library_Reports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-graph-report-100.png"))); // NOI18N
+        Library_Reports.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Library Reports", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 12))); // NOI18N
+        Library_Reports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Library_ReportsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Library_Reports, new org.netbeans.lib.awtextra.AbsoluteConstraints(854, 122, 121, 124));
 
-        jButton6.setBackground(new java.awt.Color(204, 204, 204));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-books-100.png"))); // NOI18N
-        jButton6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Catalog", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
+        Catalog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/icons8-books-100.png"))); // NOI18N
+        Catalog.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Catalog", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Georgia", 1, 14))); // NOI18N
+        Catalog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CatalogActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Catalog, new org.netbeans.lib.awtextra.AbsoluteConstraints(1055, 122, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Georgia", 1, 24)); // NOI18N
         jLabel1.setText("Library Management System");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 30, 490, 62));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(NEW_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(80, 80, 80)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(NEW_USER, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(50, 50, 50))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Library_Management_System/Images/plain-background-7102744_1920.png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 660));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -146,12 +143,31 @@ public class Library_Manager extends javax.swing.JFrame {
         new Login_Page().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void NEW_USERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NEW_USERActionPerformed
-        // TODO add your handling code here:
-        
+    private void New_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_New_UserActionPerformed
+        // TODO add your handling code here:        
         setVisible(false);
         new New_User().setVisible(true);
-    }//GEN-LAST:event_NEW_USERActionPerformed
+    }//GEN-LAST:event_New_UserActionPerformed
+
+    private void Lend_ItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Lend_ItemsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Lend_ItemsActionPerformed
+
+    private void InventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InventoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InventoryActionPerformed
+
+    private void CollectionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CollectionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CollectionsActionPerformed
+
+    private void Library_ReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Library_ReportsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Library_ReportsActionPerformed
+
+    private void CatalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CatalogActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CatalogActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,13 +195,14 @@ public class Library_Manager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton NEW_USER;
+    private javax.swing.JButton Catalog;
+    private javax.swing.JButton Collections;
+    private javax.swing.JButton Inventory;
+    private javax.swing.JButton Lend_Items;
+    private javax.swing.JButton Library_Reports;
+    private javax.swing.JButton New_User;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
