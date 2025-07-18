@@ -140,6 +140,11 @@ public class New_User extends javax.swing.JFrame {
         String Type = String.valueOf(usertype.getSelectedIndex());
         int ID = Integer.parseInt(libraryID.getText());
         
+         if(First == null || Last == null || Email == null || User == null || Pass == null || usertype.getSelectedIndex() == 0 || libraryID.getText() == null) {
+            JOptionPane.showMessageDialog(this, "Make sure to input all of the information");
+            return;
+        }
+        
         try {
              Connection con = ConnectionProvider.getCon();
              Statement st = con.createStatement();
@@ -147,15 +152,16 @@ public class New_User extends javax.swing.JFrame {
              st.executeUpdate("insert into user_role values('"+ID+"', '"+Type+"')");
              
              
+           
              JOptionPane.showMessageDialog(this, "Information has been successfully added. Welcome to our Library " + First + ".");
              setVisible(false);
              new Library_Manager().setVisible(true);
+             
         }
         catch(Exception e) {
             
-            JOptionPane.showMessageDialog(this, "This User already exists. Please try again");
-            setVisible(false);
-             new Library_Manager().setVisible(true);
+            JOptionPane.showMessageDialog(this, "Missing Information or User already Exists. Please try again");
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
