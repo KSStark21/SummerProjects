@@ -138,18 +138,19 @@ public class New_User extends javax.swing.JFrame {
         String User = username.getText();
         String Pass = password.getText();
         String Type = String.valueOf(usertype.getSelectedIndex());
-        int ID = Integer.parseInt(libraryID.getText());
+       String ID = libraryID.getText();
         
-         if(First == null || Last == null || Email == null || User == null || Pass == null || usertype.getSelectedIndex() == 0 || libraryID.getText() == null) {
+         if(First.isEmpty() || Last.isEmpty() || Email.isEmpty() || User.isEmpty() || Pass.isEmpty() || usertype.getSelectedIndex() == 0 || ID.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Make sure to input all of the information");
             return;
         }
-        
+         else {
         try {
+            int Id = Integer.parseInt(ID);
              Connection con = ConnectionProvider.getCon();
              Statement st = con.createStatement();
-             st.executeUpdate("insert into user values('"+ID+"','"+First+"', '"+Last+"', '"+Email+"', '"+User+"', '"+Pass+"')");
-             st.executeUpdate("insert into user_role values('"+ID+"', '"+Type+"')");
+             st.executeUpdate("insert into user values('"+Id+"','"+First+"', '"+Last+"', '"+Email+"', '"+User+"', '"+Pass+"')");
+             st.executeUpdate("insert into user_role values('"+Id+"', '"+Type+"')");
              
              
            
@@ -160,9 +161,10 @@ public class New_User extends javax.swing.JFrame {
         }
         catch(Exception e) {
             
-            JOptionPane.showMessageDialog(this, "Missing Information or User already Exists. Please try again");
+            JOptionPane.showMessageDialog(this, "Information is incorrect or User already Exists. Please try again");
             
         }
+         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
